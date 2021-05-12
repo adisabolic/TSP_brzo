@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1620853358 source:d:\stvari\fax\napredni algoritmi\vjezbe\projekat 1\2opt_3opt_brzo\main.cpp
+	<iostream>
+	"TSP_Tura.h"
+
+1620845875 d:\stvari\fax\napredni algoritmi\vjezbe\projekat 1\2opt_3opt_brzo\tsp_tura.h
+	<iostream>
+	<vector>
+
+1620853278 source:d:\stvari\fax\napredni algoritmi\vjezbe\projekat 1\2opt_3opt_brzo\tsp_tura.cpp
+	"TSP_Tura.h"
+	<algorithm>
+
