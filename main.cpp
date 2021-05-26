@@ -15,8 +15,9 @@ int main() {
 
     TSP_Tura tura(t, u);
 
-    cout<<tura.cvorovi[0]->susjed2->id<<endl;
-    tura.zamijeni_grane({4,2}, {1,3}, {7,5}, 3);
+    //cout<<tura.cvorovi[0]->susjed2->id<<endl;
+    //tura.zamijeni_grane({4,2}, {1,3}, {7,5}, 3);
+    tura._2Opt();
 
     vector <int> vracena = tura.vrati_vektor_ture();
 

@@ -179,4 +179,54 @@ void TSP_Tura::zamijeni_grane(pair<int, int> i, pair<int, int> j, pair<int, int>
     }
 }
 
+void TSP_Tura::_2Opt() {
+    while (true)
+    {
+        bool nadjena_bolja_tura = false;
+        Cvor* trenutni1 = korijen;
+        vector<int> posjecen1(n, false);
+
+        while(true) {
+            Cvor* trenutni1_sledeci;
+            if(trenutni1->susjed2 && !posjecen1[trenutni1->susjed2->id])
+                trenutni1_sledeci = trenutni1->susjed2;
+            else if(trenutni1->susjed1 && !posjecen1[trenutni1->susjed1->id])
+                trenutni1_sledeci = trenutni1->susjed1;
+            else
+                trenutni1_sledeci=korijen;
+
+            Cvor* trenutni2 = korijen;
+            vector<int> posjecen2(n, false);
+
+            while(true) {
+                Cvor* trenutni2_sledeci;
+                if(trenutni2->susjed2 && !posjecen2[trenutni2->susjed2->id])
+                    trenutni2_sledeci = trenutni2->susjed2;
+                else if(trenutni2->susjed1 && !posjecen2[trenutni2->susjed1->id])
+                    trenutni2_sledeci = trenutni2->susjed1;
+                else
+                    trenutni2_sledeci=korijen;
+
+                if (_2opt_uslov({trenutni1->id,trenutni1_sledeci->id},{trenutni2->id,trenutni2_sledeci->id}))
+                {
+                    cout<<"mijenjam"<<endl;
+                    zamijeni_grane({trenutni1->id,trenutni1_sledeci->id},{trenutni2->id,trenutni2_sledeci->id});
+                    nadjena_bolja_tura = true;
+                }
+                if(trenutni2_sledeci==korijen) break;
+
+                posjecen2[trenutni2->id] = true;
+                trenutni2=trenutni2_sledeci;
+            }
+
+            if(trenutni1_sledeci==korijen) break;
+            posjecen1[trenutni1->id] = true;
+            trenutni1=trenutni1_sledeci;
+        }
+        if (!nadjena_bolja_tura)
+            break;
+    }
+
+}
+
 #endif // TSP_TURA_CPP
