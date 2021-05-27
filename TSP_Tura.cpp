@@ -179,7 +179,7 @@ void TSP_Tura::zamijeni_grane(pair<int, int> i, pair<int, int> j, pair<int, int>
     }
 }
 
-void TSP_Tura::_2Opt() {
+void TSP_Tura::_2opt() {
     while (true)
     {
         bool nadjena_bolja_tura = false;
@@ -209,7 +209,6 @@ void TSP_Tura::_2Opt() {
 
                 if (_2opt_uslov({trenutni1->id,trenutni1_sledeci->id},{trenutni2->id,trenutni2_sledeci->id}))
                 {
-                    cout<<"mijenjam"<<endl;
                     zamijeni_grane({trenutni1->id,trenutni1_sledeci->id},{trenutni2->id,trenutni2_sledeci->id});
                     nadjena_bolja_tura = true;
                 }
@@ -228,5 +227,88 @@ void TSP_Tura::_2Opt() {
     }
 
 }
+
+void TSP_Tura::_3opt() {
+    while (true)
+    {
+        bool nadjena_bolja_tura = false;
+        Cvor* trenutni1 = korijen;
+        vector<int> posjecen1(n, false);
+
+        while(true) {
+            Cvor* trenutni1_sledeci;
+            if(trenutni1->susjed2 && !posjecen1[trenutni1->susjed2->id])
+                trenutni1_sledeci = trenutni1->susjed2;
+            else if(trenutni1->susjed1 && !posjecen1[trenutni1->susjed1->id])
+                trenutni1_sledeci = trenutni1->susjed1;
+            else
+                trenutni1_sledeci=korijen;
+
+            Cvor* trenutni2 = korijen;
+            vector<int> posjecen2(n, false);
+
+            while(true) {
+                Cvor* trenutni2_sledeci;
+                if(trenutni2->susjed2 && !posjecen2[trenutni2->susjed2->id])
+                    trenutni2_sledeci = trenutni2->susjed2;
+                else if(trenutni2->susjed1 && !posjecen2[trenutni2->susjed1->id])
+                    trenutni2_sledeci = trenutni2->susjed1;
+                else
+                    trenutni2_sledeci=korijen;
+
+                Cvor* trenutni3 = korijen;
+                vector<int> posjecen3(n, false);
+
+                while(true) {
+                    Cvor* trenutni3_sledeci;
+                    if(trenutni3->susjed2 && !posjecen3[trenutni3->susjed2->id])
+                        trenutni3_sledeci = trenutni3->susjed2;
+                    else if(trenutni3->susjed1 && !posjecen3[trenutni3->susjed1->id])
+                        trenutni3_sledeci = trenutni3->susjed1;
+                    else
+                        trenutni3_sledeci=korijen;
+                    if(_3opt_uslov({trenutni1->id,trenutni1_sledeci->id},{trenutni2->id,trenutni2_sledeci->id},{trenutni3->id,trenutni3_sledeci->id},3)){
+                        zamijeni_grane({trenutni1->id,trenutni1_sledeci->id},{trenutni2->id,trenutni2_sledeci->id},{trenutni3->id,trenutni3_sledeci->id},3);
+                        nadjena_bolja_tura = true;
+                    }
+                    if(_3opt_uslov({trenutni1->id,trenutni1_sledeci->id},{trenutni2->id,trenutni2_sledeci->id},{trenutni3->id,trenutni3_sledeci->id},2)){
+                        zamijeni_grane({trenutni1->id,trenutni1_sledeci->id},{trenutni2->id,trenutni2_sledeci->id},{trenutni3->id,trenutni3_sledeci->id},2);
+                        nadjena_bolja_tura = true;
+                    }
+                    if(_3opt_uslov({trenutni1->id,trenutni1_sledeci->id},{trenutni2->id,trenutni2_sledeci->id},{trenutni3->id,trenutni3_sledeci->id},1)){
+                        zamijeni_grane({trenutni1->id,trenutni1_sledeci->id},{trenutni2->id,trenutni2_sledeci->id},{trenutni3->id,trenutni3_sledeci->id},1);
+                        nadjena_bolja_tura = true;
+                    }
+                    if(_3opt_uslov({trenutni1->id,trenutni1_sledeci->id},{trenutni2->id,trenutni2_sledeci->id},{trenutni3->id,trenutni3_sledeci->id},0)){
+                        zamijeni_grane({trenutni1->id,trenutni1_sledeci->id},{trenutni2->id,trenutni2_sledeci->id},{trenutni3->id,trenutni3_sledeci->id},0);
+                        nadjena_bolja_tura = true;
+                    }
+
+                    if(trenutni3_sledeci==korijen) break;
+
+                    posjecen3[trenutni3->id] = true;
+                    trenutni3=trenutni3_sledeci;
+
+                }
+
+
+                if(trenutni2_sledeci==korijen) break;
+
+                posjecen2[trenutni2->id] = true;
+                trenutni2=trenutni2_sledeci;
+            }
+
+            if(trenutni1_sledeci==korijen) break;
+            posjecen1[trenutni1->id] = true;
+            trenutni1=trenutni1_sledeci;
+        }
+        if (!nadjena_bolja_tura)
+            break;
+    }
+
+
+}
+
+
 
 #endif // TSP_TURA_CPP

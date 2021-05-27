@@ -30,7 +30,8 @@ public:
     bool _3opt_uslov(pair<int, int>, pair<int, int>, pair<int, int>, int); // provjerava da li se isplati zamijeniti tri grane, zadnji parametar je vrsta 3opt zamjene
     void zamijeni_grane(pair<int, int>, pair<int, int>); // za 2opt - mijenja grane i->i+1 i j->j+1 sa i->j i i+1->j+1
     void zamijeni_grane(pair<int, int>, pair<int, int>, pair<int, int>, int); // 3opt - mijenja 3 grane (3opt), zadnji parametar je vrsta 3opt zamjene
-    void _2Opt();
+    void _2opt();
+    void _3opt();
 
 };
 
