@@ -5,6 +5,14 @@
 #include <vector>
 using namespace std;
 
+struct Grad
+{
+    int indeks;
+    double latitude;
+    double longitude;
+    Grad(int indeks, double latitude, double longitude):indeks(indeks), latitude(latitude), longitude(longitude) {}
+};
+
 class TSP_Tura
 {
     public:
@@ -32,7 +40,7 @@ public:
     void zamijeni_grane(pair<int, int>, pair<int, int>, pair<int, int>, int); // 3opt - mijenja 3 grane (3opt), zadnji parametar je vrsta 3opt zamjene
     void _2opt();
     void _3opt();
-
+    int duzinaTure();
 };
 
 #endif // TSP_TURA_H

@@ -23,3 +23,18 @@
 	"TSP_Tura.h"
 	<algorithm>
 
+1622913622 source:d:\stvari\fax\napredni algoritmi\vjezbe\projekat 1\tsp_tura.cpp
+	"TSP_Tura.h"
+	<algorithm>
+	<ctime>
+
+1622907420 d:\stvari\fax\napredni algoritmi\vjezbe\projekat 1\tsp_tura.h
+	<iostream>
+	<vector>
+
+1622913926 source:d:\stvari\fax\napredni algoritmi\vjezbe\projekat 1\main.cpp
+	<iostream>
+	"TSP_Tura.h"
+	<cmath>
+	<fstream>
+
